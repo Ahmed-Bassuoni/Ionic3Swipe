@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-buttons>
+      <button ion-button clear icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button clear icon-only>
+        <ion-icon name="md-chatboxes"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid height-100>
+    <!-- Cards -->
+    <ion-row cards-holder justify-content-center align-items-center>
+      <ion-col col-6>
+        <div swing-stack #swingStack [stackConfig]="stackConfig" (throwoutleft)="pass()" (throwoutright)="meet()" id="card-stack">
+          <ion-card #swingCards swing-card *ngFor="let card of cards">
+            <ion-item no-lines transparent *ngIf="card.picture">
+              <ion-row card-header padding justify-content-center align-items-center>
+                <ion-col avatar height-50 [style.backgroundImage]="'url('+card.picture.medium+')'" *ngIf="card.picture">
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-card-content *ngIf="card.location">
+              <ion-row justify-content-center>
+                <ion-col no-padding>
+                  <h1 text-capitalize text-center>{{card.name.first + ' ' + card.name.last}}</h1>
+                  <h2 text-capitalize text-center>{{card.postion}}</h2>
+                </ion-col>
+              </ion-row>
+              <ion-row margin-top justify-content-center>
+                <ion-col text-center>
+                  <h2 text-capitalize text-center>Expert At:</h2>
+                  <span *ngFor="let exprt of card.experies; let i = index">
+                    {{i <= 0 ? " " : ''}}{{exprt}}{{ i == card.experies.length -1 ? '' : ','}}
+                  </span>
+                </ion-col>
+              </ion-row>
+              <ion-row margin-top justify-content-center>
+                  <ion-col text-center>
+                    <h2 text-capitalize text-center>Intrested In:</h2>
+                    <span *ngFor="let intrest of card.intrests; let i = index">
+                      {{i <= 0 ? " " : ''}}{{intrest}}{{ i == card.intrests.length -1 ? '' : ','}}
+                    </span>
+                  </ion-col>
+                </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- Buttons -->
+    <ion-row justify-content-center align-items-center>
+      <ion-col col-6 no-padding>
+        <ion-row justify-content-around align-items-center>
+          <ion-col col-5 no-padding>
+            <button block ion-button color="danger" text-capitalize (click)="pass()">
+              pass
+            </button>
+          </ion-col>
+          <ion-col col-5 no-padding>
+            <button block ion-button color="secondary" text-capitalize (click)="meet()">
+              meet
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
